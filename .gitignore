@@ -317,4 +317,5 @@ _Pvt_Extensions
 .paket/paket.exe
 paket-files/
 
-# 
+#
+mysql/log.txt
