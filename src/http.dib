@@ -1,0 +1,26 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!csharp
+
+#r "nuget: Flurl.Http, 4.0.2"
+
+#!csharp
+
+using Flurl;
+using Flurl.Http;
+using System;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+var res = 
+"""
+{"pageId":"o8beKCWFy2iBTxLftytgXd","limit":100,"position":{"stack":[]},"chunkNumber":0}
+""";
+var resp2 =await "https://www.wolai.com/".AppendPathSegment("o8beKCWFy2iBTxLftytgXd")
+.WithHeader("reqid","5Fx3DDWtZHrCb14kEEGpUA")
+.WithHeader("cookie","wolai_client_id=8fufmhpsYoUSUYcgwr8EAD; acw_tc=1-66f40bfe-167c614c-759673998fbc0ae873d41be559e8c6700ccd34925922; token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvekFiRGtaNG41RHFybW1GTkY3MThDIiwiaWF0IjoxNzI3MjY5OTg4LCJleHAiOjIwNDI2Mjk5ODh9.rJC_gB02HBWIUI6F6AFXzmIHAAALwGTydKNcQLda_f4; isg=BKioEyziWr-SrXbdl4-5uLBfeZa60QzbzwCJe2LYryLhvUsnC-Huaha-sVVN1sSz")
+.PostJsonAsync(JsonSerializer.Deserialize<object>(res))
+.ReceiveJson<object>();
+display(resp2);
